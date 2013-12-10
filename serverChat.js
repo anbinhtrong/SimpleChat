@@ -6,10 +6,10 @@ chatServer.on('connection', function(client){
 	client.write('Server chat program\n');
 	client.on('data', function(data){
 		console.log(data.toString());
-//		for(var i = 0; i < clientChats.length; i++){
-//			clientChats[i].write(data);
-//		}
 		broadcast(data, client);
+	});
+	client.on('end', function(){
+		clientChats.splice(clientChats.indexOf(client), 1);
 	});
 });
 
